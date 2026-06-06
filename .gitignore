@@ -1,0 +1,72 @@
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment variables / secrets
+.env
+.env.local
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Model files
+*.pkl
+*.joblib
+*.h5
+*.keras
+
+# Large data files
+data/raw/
+data/interim/
+data/processed/
+*.csv
+*.txt
+*.parquet
+*.xlsx
+
+# Keep empty data folders if needed
+!data/.gitkeep
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+
+# Plots / generated outputs
+reports/figures/
+outputs/
+artifacts/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Mac/Linux temp files
+*.swp
+*.swo
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# Test/cache folders
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
