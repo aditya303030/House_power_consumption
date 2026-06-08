@@ -34,7 +34,6 @@ data/interim/
 data/processed/
 household_power_consumption.txt
 power_clean.parquet
-*.csv
 *.xlsx
 
 # Keep empty data folders if needed
@@ -43,9 +42,18 @@ power_clean.parquet
 !data/interim/.gitkeep
 !data/processed/.gitkeep
 
-# Model files
-# Keep these ignored if your model files are large
-*.pkl
+# Allow deployment model files
+!models/
+!models/best_power_model.pkl
+!models/feature_cols.pkl
+
+# Allow deployment report files
+!reports/
+!reports/model_results.csv
+!reports/test_predictions.csv
+!reports/deployment_sample.parquet
+
+# Model files to ignore by default, except deployment models above
 *.joblib
 *.h5
 *.keras
