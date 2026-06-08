@@ -150,3 +150,61 @@ results_df = pd.DataFrame(results).sort_values("MAE")
 
 print("\nModel comparison:")
 print(results_df)
+
+# saving the results
+
+os.makedirs("models", exist_ok=True)
+os.makedirs("reports", exist_ok=True)
+
+results_df.to_csv("reports/model_results.csv", index=False)
+
+print("\nSaved model results to: reports/model_results.csv")
+
+# saving the best ML model
+
+best_model_name = results_df.iloc[0]['model']
+
+model_map = {
+    "Linear Regression Model": linear_model,
+    "HistGradientBoostingModel": hgb_model,
+    "Random Forest": rf_model
+}
+
+best_model = model_map.get(best_model_name)
+
+if best_model is not None:
+    joblib.dump(best_model, "models/best_power_model.pkl")
+    joblib.dump(feature_cols, "models/feature_cols.pkl")
+
+    print(f"\nSaved best ML model: {best_model_name}")
+    print("Model saved to: models/best_power_model.pkl")
+    print("Feature columns saved to: models/feature_cols.pkl")
+else:
+    print(f"\nBest model was {best_model_name}.")
+    print("No ML model saved because the best result was a baseline.")
+
+# saving the test predictions
+
+predictions_df = pd.DataFrame(
+    {
+        "actual": y_test,
+        "baseline_current_power": baseline_current_pred,
+        "baseline_yesterday_power": baseline_yesterday_pred,
+        "linear_regression": linear_pred,
+        "hist_gradient_boosting": hgb_pred,
+        "random_forest": rf_pred
+    },
+    index=y_test.index
+)
+
+predictions_df.to_csv("reports/test_predictions.csv")
+
+print("Saved test predictions to: reports/test_predictions.csv")
+
+# saving deployment sample for Streamlit app
+
+deployment_sample = df.tail(10000)
+
+deployment_sample.to_parquet("reports/deployment_sample.parquet")
+
+print("Saved deployment sample to: reports/deployment_sample.parquet")
