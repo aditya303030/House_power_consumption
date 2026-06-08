@@ -32,9 +32,9 @@ Thumbs.db
 data/raw/
 data/interim/
 data/processed/
+household_power_consumption.txt
+power_clean.parquet
 *.csv
-*.txt
-*.parquet
 *.xlsx
 
 # Keep empty data folders if needed
